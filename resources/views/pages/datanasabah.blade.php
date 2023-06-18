@@ -39,9 +39,10 @@
                                             <th>Jangka Waktu</th>
                                             <th>Plafond Kredit</th>
                                             <th>Sisa Hutang</th>
-                                            <th>Bunga</th>
+                                            <th>Bunga / Bulan</th>
                                             <th>Angsuran Pokok</th>
                                             <th>Jumlah Tanggunan</th>
+                                            <th>Jaminan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -56,6 +57,7 @@
                                                 <td>{{ $item->bunga }}</td>
                                                 <td>{{ $item->angsuran_pokok }}</td>
                                                 <td>{{ $item->jumlah_tanggunan }}</td>
+                                                <td>{{ $item->jaminan }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

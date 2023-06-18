@@ -1,82 +1,86 @@
 <?php
+
 namespace App\Helpers;
 
-class Cart{
-    public static function jumlahTanggungan ($nilai){
-        if ($nilai < 11000000)
-        {
+class Cart
+{
+    public static function jumlahTanggungan($nilai)
+    {
+        if ($nilai < 11000000) {
             return "sedikit";
-        }else if ($nilai >= 11000000 and $nilai <= 20000000){
+        } else if ($nilai >= 11000000 and $nilai <= 20000000) {
             return "sedang";
-        }else if($nilai > 20000000){
+        } else if ($nilai > 20000000) {
             return "tinggi";
         }
     }
-    public static function sisaHutang ($nilai){
-        if ($nilai < 11000000)
-        {
+    public static function sisaHutang($nilai)
+    {
+        if ($nilai < 11000000) {
             return "sedikit";
-        }else if ($nilai >= 11000000 and $nilai <= 20000000){
+        } else if ($nilai >= 11000000 and $nilai <= 20000000) {
             return "sedang";
-        }else if($nilai > 20000000){
+        } else if ($nilai > 20000000) {
             return "tinggi";
         }
     }
-    public static function angsuranPokok ($nilai){
-        if ($nilai < 3000000)
-        {
+    public static function angsuranPokok($nilai)
+    {
+        if ($nilai < 3000000) {
             return "sedikit";
-        }else if ($nilai >= 3000000 and $nilai <= 9000000){
+        } else if ($nilai >= 3000000 and $nilai <= 9000000) {
             return "sedang";
-        }else if($nilai > 9000000){
+        } else if ($nilai > 9000000) {
             return "tinggi";
         }
     }
-    public static function jaminan ($nilai){
-        if ($nilai < 30000000)
-        {
+    public static function jaminan($nilai)
+    {
+        if ($nilai < 30000000) {
             return "sedikit";
-        }else if ($nilai >= 30000000 and $nilai <= 50000000){
+        } else if ($nilai >= 30000000 and $nilai <= 50000000) {
             return "sedang";
-        }else if($nilai > 50000000){
+        } else if ($nilai > 50000000) {
             return "tinggi";
         }
     }
-    public static function plafondKredit ($nilai){
-        if ($nilai < 30000000)
-        {
+    public static function plafondKredit($nilai)
+    {
+        if ($nilai < 30000000) {
             return "sedikit";
-        }else if ($nilai >= 30000000 and $nilai <= 50000000){
+        } else if ($nilai >= 30000000 and $nilai <= 50000000) {
             return "sedang";
-        }else if($nilai > 50000000){
+        } else if ($nilai > 50000000) {
             return "tinggi";
         }
     }
-    public static function hasil($jaminan, $jumlahtanggunan, $angsuran, $sisahutang){
-        if ($jaminan =="sedang" or $jaminan=="tinggi"){
+    public static function hasil($jaminan, $jumlahtanggunan, $angsuran, $sisahutang)
+    {
+        if ($jaminan == "sedang" or $jaminan == "tinggi") {
             return "Lancar";
-        }else {
-            if ($jumlahtanggunan  =="sedang" or $jumlahtanggunan=="tinggi"){
+        } else {
+            if ($jumlahtanggunan  == "sedang" or $jumlahtanggunan == "tinggi") {
                 return "Lancar";
-            }else {
-                if ($angsuran  =="sedang" or $angsuran=="tinggi"){
+            } else {
+                if ($angsuran  == "sedikit" or $angsuran == "tinggi") {
                     return "Lancar";
-                }else {
-                    if ($sisahutang  =="sedang" or $sisahutang=="tinggi"){
+                } else {
+                    if ($sisahutang  == "sedikit" or $sisahutang == "tinggi") {
                         return "Diragukan";
-                    }else {
+                    } else {
                         return "Macet";
                     }
                 }
             }
         }
     }
-    public static function tampilanHasil($nilai){
-        if ($nilai =="Macet"){
+    public static function tampilanHasil($nilai)
+    {
+        if ($nilai == "Macet") {
             return 'bg-danger';
-        }else if ($nilai =="Diragukan"){
+        } else if ($nilai == "Diragukan") {
             return 'bg-warning';
-        }else {
+        } else {
             return 'bg-success';
         }
     }

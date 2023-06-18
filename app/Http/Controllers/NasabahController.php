@@ -50,8 +50,8 @@ class NasabahController extends Controller
 
             ]
         );
-        $bunga = $request->suku_bunga / (12 * $request->jangka_waktu) * $request->plafond_kredit;
-        $angsuran_pokok = $request->plafond_kredit / (12 * $request->jangka_waktu);
+        $bunga = ($request->plafond_kredit * ($request->suku_bunga / 100)) / (12 * $request->jangka_waktu);
+        $angsuran_pokok = $request->plafond_kredit / (12 * $request->jangka_waktu) + $bunga;
         Nasabah::create([
             'nama' => $request->nama,
             'suku_bunga' => $request->suku_bunga,
