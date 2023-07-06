@@ -57,7 +57,7 @@
                                                 <td>{{ $item->bunga }}</td>
                                                 <td>{{ $item->angsuran_pokok }}</td>
                                                 <td>{{ $item->jumlah_tanggunan }}</td>
-                                                <td>{{ $item->jaminan }}</td>
+                                                <td>{{ App\Helpers\Additional::jaminan($item->jaminan) }}</td>
                                                 <td>
                                                     <a href="{{ url('data-nasabah/' . $item->id . '/edit') }}"
                                                         class="btn btn-sm btn-info"><i class="bi bi-pencil-square"></i></a>

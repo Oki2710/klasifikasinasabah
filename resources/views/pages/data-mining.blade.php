@@ -6,36 +6,36 @@
     <section class="section">
         <div class="card">
             <div class="card-body">
-                <div class="row">
-                    <div class="col-3 ">
-                        <div class="dataTables_length" id="table2_length">
-                            <label>
-                                <select name="table2_length" aria-controls="table2" class="form-select form-select-sm">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
-                            </label>
+                <form action="{{ url('data-mining') }}" method="POST">
+                    @csrf
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            <button type="submit" class="btn btn-primary me-1 mb-1">
+                                Klasifikasi
+                            </button>
                         </div>
                     </div>
-                </div>
-                <div class="table-responsive datatable-minimal">
-                    <div id="table2_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                        {{-- <div class="row mb-3">
-                            <div class="col-3">
-                                <a href="#" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModalCenter">
-                                    Klasifikasi</a>
+                    <div class="row">
+                        <div class="col-3 ">
+                            <div class="dataTables_length" id="table2_length">
+                                <label>
+                                    <select name="table2_length" aria-controls="table2" class="form-select form-select-sm">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </label>
                             </div>
-                        </div> --}}
-
+                        </div>
+                    </div>
+                    <div class="table-responsive datatable-minimal">
                         <div class="row dt-row">
                             <div class="col-sm-12">
                                 <table class="table dataTable no-footer" id="table2" aria-describedby="table2_info">
                                     <thead>
                                         <tr class="text-center">
-                                            {{-- <th>Pilih</th> --}}
+                                            <th>Pilih</th>
                                             <th>Nama</th>
                                             <th>Suku Bunga</th>
                                             <th>Jangka Waktu</th>
@@ -45,17 +45,18 @@
                                             <th>Angsuran Pokok</th>
                                             <th>Jumlah Tanggunan</th>
                                             <th>Jaminan</th>
-                                            <th>Aksi</th>
+                                            {{-- <th>Aksi</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($nasabah as $item)
                                             <tr class="text-center">
-                                                {{-- <td>
+                                                <td>
                                                     <div class="checkbox">
-                                                        <input type="checkbox" id="checkbox1" class="form-check-input">
+                                                        <input type="checkbox" name="id[]" id="checkbox1"
+                                                            class="form-check-input" value="{{ $item->id }}">
                                                     </div>
-                                                </td> --}}
+                                                </td>
                                                 <td>{{ $item->nama }}</td>
                                                 <td>{{ $item->suku_bunga }}</td>
                                                 <td>{{ $item->jangka_waktu }}</td>
@@ -64,12 +65,12 @@
                                                 <td>{{ $item->bunga }}</td>
                                                 <td>{{ $item->angsuran_pokok }}</td>
                                                 <td>{{ $item->jumlah_tanggunan }}</td>
-                                                <td>{{ $item->jaminan }}</td>
-                                                <td>
-                                                    <a href="{{ url('/hitung/' . $item->id) }}"
-                                                        class="btn btn-primary me-1 mb-1">
-                                                        Klasifikasi</a>
-                                                </td>
+                                                <td>{{ App\Helpers\Additional::jaminan($item->jaminan) }}</td>
+                                                {{-- <td>
+                                                        <a href="{{ url('/hitung/' . $item->id) }}"
+                                                            class="btn btn-primary me-1 mb-1">
+                                                            Klasifikasi</a>
+                                                    </td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -77,8 +78,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
+            </form>
+        </div>
         </div>
     </section>
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"

@@ -32,4 +32,25 @@ class DataminingController extends Controller
         Nasabah::where('id', $id)->update(['kolektibilitas' => $hasil]);
         return redirect('/hasil');
     }
+
+    public function store(Request $request) /* untuk checkbox pilihan data */
+    {
+        // return $request->id;
+        $request->validate([
+            'id' => 'required',
+        ]);
+
+        foreach ($request->id as $id) {
+            $data = Nasabah::where('id', $id)->first();
+
+            $hasil = Cart::hasil(
+                Cart::jaminan($data->jaminan),
+                Cart::jumlahTanggungan($data->jumlah_tanggunan),
+                Cart::angsuranPokok($data->angsuran_pokok),
+                Cart::sisaHutang($data->sisa_hutang),
+            );
+            Nasabah::where('id', $id)->update(['kolektibilitas' => $hasil]);
+        }
+        return redirect('/hasil');
+    }
 }

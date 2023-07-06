@@ -51,9 +51,8 @@
                                                 <td>{{ $item->bunga }}</td>
                                                 <td>{{ $item->angsuran_pokok }}</td>
                                                 <td>{{ $item->jumlah_tanggunan }}</td>
-                                                <td>{{ $item->jaminan }}</td>
+                                                <td>{{ App\Helpers\Additional::jaminan($item->jaminan) }}</td>
                                                 <td>
-
                                                     <span
                                                         class="badge {{ App\Helpers\Cart::tampilanHasil($item->kolektibilitas) }}">
                                                         {{ $item->kolektibilitas }}
