@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EditDataController;
 use App\Http\Controllers\DataminingController;
 use App\Http\Controllers\NasabahController;
 use Illuminate\Support\Facades\Route;
@@ -26,11 +27,14 @@ Route::get('/home', function () {
     return view('pages.dashboard');
 })->middleware(['auth', 'checkRole:admin']);
 
+
 Route::resource('data-mining', DataminingController::class)->middleware(['auth', 'checkRole:admin']);
 
 route::get('/hasil', [DataminingController::class, 'hasil'])->middleware(['auth', 'checkRole:admin,user']);
 
 Route::resource('data-nasabah', NasabahController::class)->middleware(['auth', 'checkRole:admin']);
+
+
 
 route::get('/hitung/{id}', [DataminingController::class, 'hitung'])->middleware(['auth', 'checkRole:admin']);
 

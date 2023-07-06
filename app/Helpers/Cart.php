@@ -59,13 +59,13 @@ class Cart
         if ($jaminan == "sedang" or $jaminan == "tinggi") {
             return "Lancar";
         } else {
-            if ($jumlahtanggunan  == "sedang" or $jumlahtanggunan == "tinggi") {
+            if ($jumlahtanggunan  == "sedang" or $jumlahtanggunan == "sedikit") {
                 return "Lancar";
             } else {
                 if ($angsuran  == "sedikit" or $angsuran == "tinggi") {
                     return "Lancar";
                 } else {
-                    if ($sisahutang  == "sedikit" or $sisahutang == "tinggi") {
+                    if ($sisahutang  == "sedikit" or $sisahutang == "sedang") {
                         return "Diragukan";
                     } else {
                         return "Macet";
@@ -80,7 +80,7 @@ class Cart
             return 'bg-danger';
         } else if ($nilai == "Diragukan") {
             return 'bg-warning';
-        } else {
+        } else if ($nilai == "Lancar") {
             return 'bg-success';
         }
     }

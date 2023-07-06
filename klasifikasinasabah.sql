@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 11, 2023 at 01:12 PM
+-- Generation Time: Jun 18, 2023 at 06:00 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -58,7 +58,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(5, '2023_06_10_121414_create_nasabah_table', 1);
+(5, '2023_06_10_121414_create_nasabah_table', 1),
+(6, '2023_06_17_103318_add_jaminan_to_nasabah_table', 2),
+(7, '2023_06_17_111325_add_kolektibilitas_to_nasabah_table', 3),
+(8, '2023_06_17_122631_add_role_to_users_table', 4);
 
 -- --------------------------------------------------------
 
@@ -76,6 +79,8 @@ CREATE TABLE `nasabah` (
   `bunga` int NOT NULL,
   `angsuran_pokok` int NOT NULL,
   `jumlah_tanggunan` int NOT NULL,
+  `jaminan` int DEFAULT NULL,
+  `kolektibilitas` enum('Macet','Diragukan','Lancar') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -84,11 +89,8 @@ CREATE TABLE `nasabah` (
 -- Dumping data for table `nasabah`
 --
 
-INSERT INTO `nasabah` (`id`, `nama`, `suku_bunga`, `jangka_waktu`, `plafond_kredit`, `sisa_hutang`, `bunga`, `angsuran_pokok`, `jumlah_tanggunan`, `created_at`, `updated_at`) VALUES
-(5, 'FACHRUDIN', '6', '3', 25000000, 16485226, 4166667, 694444, 0, '2023-06-10 07:24:07', '2023-06-10 07:24:07'),
-(6, 'GALIEHLAM AZNUN', '6', '4', 100000000, 75234921, 12500000, 2083333, 0, '2023-06-11 05:25:44', '2023-06-11 05:25:44'),
-(7, 'MISTRI', '6', '2', 50000000, 20660400, 12500000, 2083333, 0, '2023-06-11 05:38:01', '2023-06-11 05:38:01'),
-(8, 'Benito Villasenor', '6', '3', 10000000, 0, 1666667, 277778, 0, '2023-06-11 06:11:45', '2023-06-11 06:11:45');
+INSERT INTO `nasabah` (`id`, `nama`, `suku_bunga`, `jangka_waktu`, `plafond_kredit`, `sisa_hutang`, `bunga`, `angsuran_pokok`, `jumlah_tanggunan`, `jaminan`, `kolektibilitas`, `created_at`, `updated_at`) VALUES
+(18, 'asdd', '6', '1', 120000000, 0, 600000, 10600000, 0, 29999999, 'Lancar', '2023-06-17 22:32:45', '2023-06-17 22:37:48');
 
 -- --------------------------------------------------------
 
@@ -133,10 +135,19 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` enum('admin','user') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin@gmail.com', NULL, '$2y$10$sJkylJiJLBrkzTK6m3.VbuYCAygXAu2Vqh7cu79YIDDaF.qIY1SV6', 'admin', NULL, '2023-06-17 05:33:20', '2023-06-17 05:33:20'),
+(2, 'User', 'user@gmail.com', NULL, '$2y$10$6zh1VR6R2VQJ82RymWLMOuMQ4AmBVi6RbCP5SoXulhmjQWDQSCZOS', 'user', NULL, '2023-06-17 05:34:48', '2023-06-17 05:34:48');
 
 --
 -- Indexes for dumped tables
@@ -196,13 +207,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `nasabah`
 --
 ALTER TABLE `nasabah`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -214,7 +225,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
